@@ -24,14 +24,15 @@ app.use(cookieParser());
 mongoose.set("strictQuery", false);
 
 // Connect to the MongoDB database
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB!");
-  })
-  .catch((error) => {
-    console.error("Error Connecting MongoDB", error);
-  });
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log("Error Connecting MongoDB", error);
+    process.exit(1);
+  }
+};
 
 // Define the CRUD routes
 app.get("/", (req, res) => {
@@ -53,7 +54,9 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
+//Connect to the database before listening
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
+  });
 });

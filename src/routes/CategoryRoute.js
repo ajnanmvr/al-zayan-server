@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Category = require("../Models/CategoryModel");
+const Category = require("../models/CategoryModel");
 
 router.post("/", async (req, res, next) => {
   try {
