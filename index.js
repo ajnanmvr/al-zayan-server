@@ -43,9 +43,9 @@ app.use((req, res, next) => {
   next();
 });
 // Create a new data model
-app.use("/api/data", dataRoute);
-app.use("/api/user", userRoute);
-app.use("/api/category", categoryRoute);
+app.use("/api/v1.0/data", dataRoute);
+app.use("/api/v1.0/user", userRoute);
+app.use("/api/v1.0/category", categoryRoute);
 app.all("*", (req, res) => {
   res.status(400).json({
     error: `${req.originalUrl} [${req.method}] is not found in this server`,
