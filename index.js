@@ -13,7 +13,7 @@ const errorHandler = require("./src/utils/ErrorHandler");
 require("dotenv").config();
 app.use(
   cors({
-    origin: "https://e-pedika.vercel.app",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
