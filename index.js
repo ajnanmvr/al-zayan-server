@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(morgan("dev"));
-const port = process.env.PORT || 3127;
+const PORT = process.env.PORT || 3127;
 app.use(bodyParser.json());
 app.use(cookieParser());
 mongoose.set("strictQuery", false);
@@ -54,6 +54,6 @@ app.all("*", (req, res) => {
 app.use(errorHandler);
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server started on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
 });
