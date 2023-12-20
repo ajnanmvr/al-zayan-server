@@ -37,7 +37,7 @@ router.post(
       let thumbnail = req.file.path;
       const uploadResult = await cloudinary.uploader
         .upload(thumbnail, {
-          folder: "posts",
+          folder: "alzayan",
           width: 2400,
           height: 1600,
           crop: "limit",
@@ -141,7 +141,7 @@ router.patch("/:id", protect, isAdmin, async (req, res, next) => {
 // Delete a data model by ID
 router.delete("/:id", protect, isAdmin, async (req, res, next) => {
   try {
-    const data = await DataModel.findByIdAndRemove(req.params.id);
+    const data = await DataModel.findByIdAndDelete(req.params.id);
     if (!data) {
       res.status(404).json({ error: "Data not found" });
     } else {
