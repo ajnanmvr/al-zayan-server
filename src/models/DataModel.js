@@ -45,6 +45,10 @@ try {
       specs: {
         type: [String],
       },
+      purchase: {
+        type: String,
+        required: true,
+      },
     },
     {
       timestamps: true,
