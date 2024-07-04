@@ -45,30 +45,32 @@ router.post("/login", (req, res) => {
           expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
         });
 
-        res.status(200).json({ message: "Sign in successful" ,token, expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
-      });
+        res.status(200).json({
+          message: "Sign in successful",
+          token,
+          expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
+        });
       });
     })
     .catch((error) => {
       res.status(500).json({ error: "Internal server error" });
     });
 });
-router.get('/', protect, async (req, res) => {
+router.get("/", protect, async (req, res) => {
   try {
-
     const userId = req.user._id;
 
     // Fetch the user details from the database using the userId
-    const user = await User.findById(userId).select('-password');
+    const user = await User.findById(userId).select("-password");
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
 
     // Return the user details (excluding the password) in the response
     res.json(user);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 // Admin signup route
